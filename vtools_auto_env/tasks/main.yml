@@ -32,7 +32,7 @@
   lineinfile:
     path: "{{ code_root_dir }}/avocado-vt/virttest/test-providers.d/io-github-autotest-libvirt.ini"
     regexp: '^uri:'
-    line: 'uri: file://{{ code_root_dir }}/tp-libvirt'
+    line: "uri: file://{{ code_root_dir | regex_replace('\\/$', '') }}/tp-libvirt"
 
 - name: "running 'avocado vt-bootstrap'"
   command:
