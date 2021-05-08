@@ -1,0 +1,18 @@
+---
+# defaults file for vtools_auto_env
+
+# packages for installation
+pkgs: []
+
+# the path where to put source codes
+# Must NOT end with '/'.
+code_root_dir: /root/v2v_auto
+
+jobs_yaml: null
+vt_cfgs: null
+tp_libvirt_cfgs: null
+
+# proxy server
+proxy_env:
+  http_proxy: null
+  https_proxy: null

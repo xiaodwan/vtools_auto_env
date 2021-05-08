@@ -1,0 +1,33 @@
+---
+- name: setup automation develop envrionment
+  hosts: v2v_servers
+  vars:
+    pkgs:
+      - git
+      - virt-v2v
+      - vim
+      - virtio-win
+      - tcpdump
+      - gcc
+      - virt-install
+      - libvirt
+      - qemu-kvm
+      - http://download.eng.bos.redhat.com/brewroot/vol/rhel-8/packages/python3-ovirt-engine-sdk4/4.3.4/1.el8ev/x86_64/python3-ovirt-engine-sdk4-4.3.4-1.el8ev.x86_64.rpm
+      - python3-pillow
+      - platform-python-devel
+    proxy_env:
+      http_proxy: ''
+      https_proxy: ''
+    jobs_yaml: ''
+    vt_cfgs: ''
+    tp_libvirt_cfgs: ''
+  roles:
+    - vtools_auto_env
+  pre_tasks:
+    - name: Wecome to use my first ansible script
+      debug:
+        msg: >
+          Welcome!
+
+  tasks:
+    - import_tasks: vtools_auto_env/tasks/replace_variants.yml

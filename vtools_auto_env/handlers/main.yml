@@ -1,0 +1,12 @@
+---
+# handlers file for vtools_auto_env
+- name: Restart libvirtd
+  service:
+    name: libvirtd
+    state: restarted
+  listen: __restart_libvirtd
+
+- name: v2v vt-bootstrap
+  command:
+    cmd: "avocado vt-bootstrap --vt-type v2v --vt-no-downloads"
+  listen: __v2v_vt_bootstrap

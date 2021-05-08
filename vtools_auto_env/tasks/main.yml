@@ -1,0 +1,43 @@
+---
+# tasks file for vtools_auto_env
+- name: install packages in v2v server
+  yum:
+    name: '{{ pkgs }}'
+    state: latest
+    disable_gpg_check: yes
+  notify: __restart_libvirtd
+
+- name: "cloning source codes"
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ code_root_dir }}/{{ item.name }}"
+    update: 'no'
+    #force: 'yes'
+  loop: '{{ projects }}'
+  environment: "{{ proxy_env }}"
+
+- name: 'installing avocado'
+  command:
+    cmd: "{{ ansible_facts['discovered_interpreter_python'] }} setup.py install"
+    chdir: "{{ code_root_dir }}/avocado"
+    creates: '/usr/local/bin/avocado'
+
+- name: 'install avocado-vt'
+  command:
+    cmd: "{{ ansible_facts['discovered_interpreter_python'] }} setup.py develop"
+    chdir: "{{ code_root_dir }}/avocado-vt"
+    creates: '/usr/local/lib/python3.6/site-packages/avocado-framework-plugin-vt.egg-link'
+
+- name: 'setup tp-libvirt cases'
+  lineinfile:
+    path: "{{ code_root_dir }}/avocado-vt/virttest/test-providers.d/io-github-autotest-libvirt.ini"
+    regexp: '^uri:'
+    line: 'uri: file://{{ code_root_dir }}/tp-libvirt'
+
+- name: "running 'avocado vt-bootstrap'"
+  command:
+    cmd: "avocado vt-bootstrap --yes-to-all"
+    creates: '/var/lib/avocado/data/avocado-vt/images/jeos-27-x86_64.qcow2.xz'
+  environment: "{{ proxy_env }}"
+  notify: __v2v_vt_bootstrap
+

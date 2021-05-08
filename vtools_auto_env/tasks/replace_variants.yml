@@ -1,0 +1,18 @@
+---
+- name: copy v2v_fill_up_cfg.py to managed hosts
+  copy:
+    #src: "vtools_auto_env/files/v2v_fill_up_cfg.py"
+    src: "../files/v2v_fill_up_cfg.py"
+    dest: "~/"
+    mode: '0655'
+
+- name: copy jobs.yaml to managed hosts
+  copy:
+    src: "{{ jobs_yaml }}"
+    dest: "~/"
+
+- name: running script to replace variants with real values in cfg files
+  command:
+    cmd: "{{ ansible_facts['discovered_interpreter_python'] }} v2v_fill_up_cfg.py jobs.yaml {{ vt_cfgs }} {{ tp_libvirt_cfgs }}"
+    chdir: "~/"
+  notify: __v2v_vt_bootstrap

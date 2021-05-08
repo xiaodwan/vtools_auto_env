@@ -1,0 +1,9 @@
+---
+# vars file for vtools_auto_env
+projects:
+  - name: avocado
+    repo: https://github.com/avocado-framework/avocado.git
+  - name: avocado-vt
+    repo: https://github.com/avocado-framework/avocado-vt.git
+  - name: tp-libvirt
+    repo: https://github.com/autotest/tp-libvirt.git
