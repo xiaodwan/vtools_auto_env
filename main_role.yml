@@ -27,9 +27,9 @@
       - virt-install
       - libvirt
       - qemu-kvm
-      - http://download.eng.bos.redhat.com/brewroot/vol/rhel-8/packages/python3-ovirt-engine-sdk4/4.3.4/1.el8ev/x86_64/python3-ovirt-engine-sdk4-4.3.4-1.el8ev.x86_64.rpm
-      - python3-pillow
       - platform-python-devel
+    pkgs_8: []
+    pkgs_9: []
     proxy_env:
       http_proxy: ''
       https_proxy: ''
@@ -46,3 +46,4 @@
 
   tasks:
     - import_tasks: vtools_auto_env/tasks/replace_variants.yml
+    when: jobs_yaml is defined and jobs_yaml != ''

@@ -1,8 +1,18 @@
 ---
 # tasks file for vtools_auto_env
+- name: prepare packages for v2v servers on rhel9 or newer
+  set_fact:
+    pkgs_all: "{{ pkgs + pkgs_9 }}"
+  when: ansible_facts.distribution == "RedHat" and ansible_facts.distribution_major_version is version('9', '>=')
+
+- name: prepare packages for v2v servers on rhel8
+  set_fact:
+    pkgs_all: "{{ pkgs + pkgs_8 }}"
+  when: ansible_facts.distribution == "RedHat" and ansible_facts.distribution_major_version is version('8', '==')
+
 - name: install packages in v2v server
   yum:
-    name: '{{ pkgs }}'
+    name: '{{ pkgs_all }}'
     state: latest
     disable_gpg_check: yes
   notify: __restart_libvirtd
