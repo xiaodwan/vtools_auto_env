@@ -22,7 +22,7 @@
     chdir: "{{ code_root_dir }}/avocado"
     creates: '/usr/local/bin/avocado'
 
-- name: 'install avocado-vt'
+- name: 'installing avocado-vt'
   command:
     cmd: "{{ ansible_facts['discovered_interpreter_python'] }} setup.py develop"
     chdir: "{{ code_root_dir }}/avocado-vt"
