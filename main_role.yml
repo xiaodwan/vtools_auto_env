@@ -1,4 +1,20 @@
 ---
+- name: Update ssh_keys in known_hosts file
+  hosts: localhost
+  tasks:
+    - name: get remote host's ssh key
+      command: 'ssh-keyscan -t ecdsa-sha2-nistp256 {{ item }}'
+      register: ssh_keyscan_res
+      loop: "{{ groups.v2v_servers }}"
+
+    - name: update knowhosts file
+      known_hosts:
+        name: "{{ item.item }}"
+        state: present
+        key: "{{ item.stdout }}"
+      loop: "{{ ssh_keyscan_res.results }}"
+
+---
 - name: setup automation develop envrionment
   hosts: v2v_servers
   vars:
@@ -24,7 +40,7 @@
   roles:
     - vtools_auto_env
   pre_tasks:
-    - name: Wecome to use my first ansible script
+    - name: Wecome to use avtools_auto_env ansible script
       debug:
         msg: >
           Welcome!
