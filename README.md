@@ -1,5 +1,6 @@
 # vtools_auto_env
 
+```yaml
 Example vars:
 
   vars:
@@ -25,4 +26,5 @@ Example vars:
     jobs_yaml: '~/jobs.yaml'
     vt_cfgs: '{{ code_root_dir }}/avocado-vt/virttest/backends/v2v/cfg/'
     tp_libvirt_cfgs: '{{ code_root_dir }}/tp-libvirt/v2v/tests/cfg/'
+```
  
