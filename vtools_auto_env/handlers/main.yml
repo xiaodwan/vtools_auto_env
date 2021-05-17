@@ -3,7 +3,7 @@
 - name: Restart libvirtd
   service:
     name: libvirtd
-    state: restarted
+    state: started
   listen: __restart_libvirtd
 
 - name: v2v vt-bootstrap
