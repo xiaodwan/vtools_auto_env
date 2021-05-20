@@ -3,10 +3,13 @@
 
 # common packages for installation
 pkgs: []
+pip_pkgs: []
 # packages only exist on rhel8
 pkgs_8: []
+pip_pkgs_8: []
 # packages only exist on rhel9
 pkgs_9: []
+pip_pkgs_9: []
 
 # the path where to put source codes
 code_root_dir: /var/tmp/v2v_auto/

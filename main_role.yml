@@ -30,6 +30,8 @@
       - platform-python-devel
     pkgs_8: []
     pkgs_9: []
+    pip_pkgs_9:
+      - Pillow
     proxy_env:
       http_proxy: ''
       https_proxy: ''
