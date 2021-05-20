@@ -48,4 +48,4 @@
 
   tasks:
     - import_tasks: vtools_auto_env/tasks/replace_variants.yml
-    when: jobs_yaml is defined and jobs_yaml != ''
+      when: jobs_yaml is defined and jobs_yaml != ''
