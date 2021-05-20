@@ -25,6 +25,11 @@
     name: '{{ pip_pkgs_all }}'
     extra_args: --user
 
+- name: restart libvirtd
+  service:
+    name: libvirtd
+    state: restarted
+
 - name: "cloning source codes"
   git:
     repo: "{{ item.repo }}"
@@ -44,7 +49,7 @@
   command:
     cmd: "{{ ansible_facts['discovered_interpreter_python'] }} setup.py develop"
     chdir: "{{ code_root_dir }}/avocado-vt"
-    creates: '/usr/local/lib/python3.6/site-packages/avocado-framework-plugin-vt.egg-link'
+    creates: '/usr/local/lib/python*/site-packages/avocado-framework-plugin-vt.egg-link'
 
 - name: 'setup tp-libvirt cases'
   lineinfile:
@@ -55,7 +60,7 @@
 - name: "running 'avocado vt-bootstrap'"
   command:
     cmd: "avocado vt-bootstrap --yes-to-all"
-    creates: '/var/lib/avocado/data/avocado-vt/images/jeos-27-x86_64.qcow2.xz'
+    creates: '/var/lib/avocado/data/avocado-vt/images/jeos-*-x86_64.qcow2.xz'
   environment: "{{ proxy_env }}"
   notify: __v2v_vt_bootstrap
 
