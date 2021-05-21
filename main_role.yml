@@ -2,13 +2,6 @@
 - name: Update ssh_keys in known_hosts file
   hosts: localhost
   tasks:
-    - name: delete all old items in know_hosts file
-      lineinfile:
-        path: '~/.ssh/known_hosts'
-        regexp: '{{ item }}'
-        state: absent
-      loop: "{{ groups.v2v_servers }}"
-
     - name: get remote host's ssh key
       command: 'ssh-keyscan -t ecdsa-sha2-nistp256 {{ item }}'
       register: ssh_keyscan_res
