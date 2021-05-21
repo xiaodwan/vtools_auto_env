@@ -43,8 +43,6 @@
       http_proxy: ''
       https_proxy: ''
     jobs_yaml: ''
-    vt_cfgs: ''
-    tp_libvirt_cfgs: ''
   roles:
     - vtools_auto_env
   pre_tasks:

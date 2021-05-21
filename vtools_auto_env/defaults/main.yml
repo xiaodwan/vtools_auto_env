@@ -15,8 +15,8 @@ pip_pkgs_9: []
 code_root_dir: /var/tmp/v2v_auto/
 
 jobs_yaml: null
-vt_cfgs: null
-tp_libvirt_cfgs: null
+vt_cfgs: '{{ code_root_dir }}/avocado-vt/virttest/backends/v2v/cfg/'
+tp_libvirt_cfgs: '{{ code_root_dir }}/tp-libvirt/v2v/tests/cfg/'
 
 # proxy server
 proxy_env:
